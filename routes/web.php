@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController\HomepageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['controller' => HomepageController::class,'prefix' => 'group', 'as' => 'group.'],  function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('edit/{groupModel}', 'edit')->name('edit');
+    Route::delete('destroy/{groupModel}', 'destroy')->name('destroy');
+    Route::get('form_check','check')->name('form_check');
 });
+
